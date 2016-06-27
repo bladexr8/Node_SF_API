@@ -1,0 +1,24 @@
+{
+  "name": "node_sf_api",
+  "version": "1.0.0",
+  "description": "Test App for accessing Salesforce API's from Node.js",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bladexr8/Node_SF_API.git"
+  },
+  "author": "Stephen Moss",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bladexr8/Node_SF_API/issues"
+  },
+  "homepage": "https://github.com/bladexr8/Node_SF_API#readme",
+  "dependencies": {
+    "nforce": "^1.5.0",
+    "nforce-metadata": "^1.0.7",
+    "underscore": "^1.8.3"
+  }
+}
