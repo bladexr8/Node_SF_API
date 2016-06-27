@@ -14,13 +14,16 @@ var credentials = require('./credentials.js');
 // underscore module reference
 var _ = require('underscore');
 
+// api version we are interested in
+const API_VERSION= '37.0'
+
 // create SF connection
 console.log('***Creating Salesforce Connection...');
 var org = nforce.createConnection({
 	clientId: credentials.sf_credentials.clientId,
 	clientSecret: credentials.sf_credentials.clientSecret,
 	redirectUri: 'https://localhost:3000/oauth/_callback',
-	apiVersion: '37.0',
+	apiVersion: API_VERSION,
 	environment: 'production',
 	mode: 'multi',
 	metaOpts: { // options for nforce-metadata
@@ -59,10 +62,25 @@ function printMetadata() {
 			{ type: 'ApexClass' }
 		]
 	}).then(function(meta) {
+		console.log('***Displaying Metadata List...');
 		_.each(meta, function(r) {
 			console.log(r.type + ': ' + r.fullName + ' (' + r.fileName + ')');
 		});
 	}).error(function(err) {
 		console.error('***Error Retrieving Metadata - ' + err);
+	});
+	
+
+	org.meta.describeMetadata({
+		oauth: oauth,
+		apiVersion: API_VERSION
+	}).then(function(meta) {
+		_.each(meta, function(r) {
+			console.log('***Displaying Metadata Descriptions...');
+			//console.log(r.type + ': ' + r.fullName + ' (' + r.fileName + ')');
+			console.log(r);
+		});
+	}).error(function(err) {
+		console.error('***Error Describing Metadata - ' + err);
 	});
 }
